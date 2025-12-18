@@ -9,11 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # Плагин YOLO
   ultralytics_yolo: ^0.1.25
-  # Для выбора изображений
   image_picker: ^0.8.7
-  
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

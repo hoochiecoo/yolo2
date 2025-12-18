@@ -24,13 +24,11 @@ class _YOLODemoState extends State<YOLODemo> {
 
   Future<void> loadYOLO() async {
     setState(() => isLoading = true);
-
     try {
       yolo = YOLO(
-        modelPath: 'yolo11n', // Имя файла без расширения .tflite, если плагин так требует, или с ним, проверьте доки
+        modelPath: 'yolo11n',
         task: YOLOTask.detect,
       );
-
       await yolo!.loadModel();
     } catch (e) {
       print("Error loading model: $e");
@@ -70,28 +68,18 @@ class _YOLODemoState extends State<YOLODemo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (selectedImage != null)
-                Container(
-                  height: 300,
-                  child: Image.file(selectedImage!),
-                ),
-
+                Container(height: 300, child: Image.file(selectedImage!)),
               SizedBox(height: 20),
-
               if (isLoading)
                 CircularProgressIndicator()
               else
                 Text('Detected ${results.length} objects'),
-
               SizedBox(height: 20),
-
               ElevatedButton(
                 onPressed: yolo != null ? pickAndDetect : null,
                 child: Text('Pick Image & Detect'),
               ),
-
               SizedBox(height: 20),
-
-              // Show detection results
               Expanded(
                 child: ListView.builder(
                   itemCount: results.length,
@@ -99,9 +87,7 @@ class _YOLODemoState extends State<YOLODemo> {
                     final detection = results[index];
                     return ListTile(
                       title: Text(detection['class'] ?? 'Unknown'),
-                      subtitle: Text(
-                        'Confidence: ${(detection['confidence'] * 100).toStringAsFixed(1)}%'
-                      ),
+                      subtitle: Text('Confidence: ${(detection['confidence'] * 100).toStringAsFixed(1)}%'),
                     );
                   },
                 ),
