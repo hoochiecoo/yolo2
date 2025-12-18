@@ -1,0 +1,25 @@
+name: yolo_demo
+description: A new Flutter project with YOLO object detection.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Плагин YOLO
+  ultralytics_yolo: ^0.1.25
+  # Для выбора изображений
+  image_picker: ^0.8.7
+  
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
