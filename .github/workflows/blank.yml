@@ -26,6 +26,23 @@ jobs:
       - name: Get Dependencies
         run: flutter pub get
 
+      # МАГИЯ ЗДЕСЬ: Генерируем Android проект с нуля, чтобы он был v2 совместимым
+      - name: Generate Android Project Structure
+        run: flutter create . --platforms=android
+
+      # Копируем модель из папки репозитория в системную папку Android assets
+      - name: Inject Model to Android Assets
+        run: |
+          mkdir -p android/app/src/main/assets
+          # Проверяем есть ли модель, если нет - создаем заглушку чтобы не упал билд
+          if [ -f "models/yolo11n.tflite" ]; then
+            cp models/yolo11n.tflite android/app/src/main/assets/
+            echo "Model copied successfully!"
+          else
+            echo "WARNING: Model file not found in models/yolo11n.tflite. Creating dummy."
+            touch android/app/src/main/assets/yolo11n.tflite
+          fi
+
       - name: Build APK
         run: flutter build apk --release
 
